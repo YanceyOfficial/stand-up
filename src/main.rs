@@ -35,7 +35,7 @@ fn main() {
         thread::sleep(reminder_interval);
 
         let mut rng = rand::thread_rng();
-        let random_number: usize = rng.gen_range(0..20);
+        let random_number: usize = rng.gen_range(0..sentences.len());
 
         Notification::new()
             .appname("Stand Up!")

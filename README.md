@@ -5,7 +5,8 @@ A sedentary reminder written in Rust.
 ## Usage
 
 ```bash
-# Make sure you have terminal-notifier installed on your system as well, as it's required for sending notifications on macOS. You can install it with Homebrew:
+# Make sure you have terminal-notifier installed on your system, as it's required for sending notifications on macOS. 
+# You can install it with Homebrew:
 brew install terminal-notifier
 
 # To compile binary file 

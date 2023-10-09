@@ -1,11 +1,9 @@
+use chrono::prelude::*;
 use notify_rust::Notification;
 use rand::Rng;
 use std::{thread, time::Duration};
 
-// const ICS_URL: &str = "https://calendars.icloud.com/holidays/cn_zh.ics/";
-
 fn main() {
-    // Generation by ChatGPT.
     let sentences = [
         "亲亲，乖乖，记得不要一直坐在电脑前哦！起来动动，让小腿肚子舒服一下呀！",
         "宝宝，你坐了这么久，脊椎一定很酸痛吧？和我一起起来走一圈吧，我给你揉揉肩膀哦~",
@@ -29,20 +27,25 @@ fn main() {
         "喵喵，你看你看，我都做了几个小猫伸展运动了呢！一起来跟我学学，让身体更灵活哦！"
     ];
 
-    let reminder_interval = Duration::from_secs(1 * 60 * 60);
+    let reminder_interval = Duration::from_secs(1);
 
     loop {
-        thread::sleep(reminder_interval);
+        let now = Utc::now();
+        let (minute, second) = (now.minute(), now.second());
 
-        let mut rng = rand::thread_rng();
-        let random_number: usize = rng.gen_range(0..sentences.len());
+        if minute == 55 && second == 0 {
+            let mut rng = rand::thread_rng();
+            let random_number: usize = rng.gen_range(0..sentences.len());
 
-        Notification::new()
-            .appname("Stand Up!")
-            .summary("三點幾了，飲茶先啦！")
-            .body(sentences[random_number])
-            .sound_name("Glass")
-            .show()
-            .unwrap();
+            Notification::new()
+                .appname("Stand Up!")
+                .summary("三點幾了，飲茶先啦！")
+                .body(sentences[random_number])
+                .sound_name("Glass")
+                .show()
+                .unwrap();
+
+            thread::sleep(reminder_interval);
+        }
     }
 }

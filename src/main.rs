@@ -33,7 +33,7 @@ fn main() {
         let now = Utc::now();
         let (minute, second) = (now.minute(), now.second());
 
-        if minute == 55 && second == 0 {
+        if minute == 40 && second == 0 {
             let mut rng = rand::thread_rng();
             let random_number: usize = rng.gen_range(0..sentences.len());
 
